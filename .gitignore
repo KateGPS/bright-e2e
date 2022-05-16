@@ -25,5 +25,4 @@ gradle-app.setting
 .idea/usage.statistics.xml
 
 # Gradle:
-.idea/gradle.xml
 .idea/libraries
