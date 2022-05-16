@@ -12,7 +12,10 @@ repositories {
 dependencies {
     testImplementation("org.seleniumhq.selenium:selenium-java:4.1.4")
     testImplementation("org.seleniumhq.selenium:selenium-chrome-driver:4.1.4")
-    testRuntimeOnly("org.testng:testng:7.5")
+    testImplementation("org.testng:testng:7.5")
+    testImplementation("org.slf4j:slf4j-jdk14:1.7.36")
+
+
 }
 
 tasks.getByName<Test>("test") {
