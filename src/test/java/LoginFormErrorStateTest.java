@@ -23,42 +23,41 @@ public class LoginFormErrorStateTest {
 
     @BeforeTest
     public void openBrowser() {
-        this.driver = new ChromeDriver();
+        driver = new ChromeDriver();
         driver.manage().timeouts().implicitlyWait(Duration.ofMillis(3000));
 
     }
 
     @AfterTest
     public void closeBrowser() {
-        this.driver.quit();
+        driver.quit();
     }
 
     @Test
-    public void LoginWithoutLoginPassword() {
+    public void LoginWithoutEmailAndPassword() {
 
         // Arrange
         driver.get("https://app.neuralegion.com/login");
 
         //Assert
-        WebElement submit = driver.findElement(By.cssSelector("auth-login-form form > button"));
-        Assert.assertEquals(false, submit.isEnabled());
-
+        WebElement submitButton = driver.findElement(By.cssSelector("auth-login-form form > button"));
+        Assert.assertEquals(submitButton.isEnabled(), false);
     }
 
     @Test
     public void LoginWithoutEmail() {
 
         // Arrange
-        final String email = "catbubliktest1@yandex.ru";
+        final String emailInput = "catbubliktest1@yandex.ru";
         driver.get("https://app.neuralegion.com/login");
 
         // Act
         WebElement login = driver.findElement(By.id("mat-input-0"));
-        login.sendKeys(email);
+        login.sendKeys(emailInput);
 
         // Assert
-        WebElement submit = driver.findElement(By.cssSelector("auth-login-form form > button"));
-        Assert.assertEquals(false, submit.isEnabled());
+        WebElement submitButton = driver.findElement(By.cssSelector("auth-login-form form > button"));
+        Assert.assertEquals(submitButton.isEnabled(), false);
 
     }
 
@@ -75,21 +74,21 @@ public class LoginFormErrorStateTest {
         password.sendKeys(passwordText);
 
         // Assert
-        WebElement submit = driver.findElement(By.cssSelector("auth-login-form form > button"));
-        Assert.assertEquals(false, submit.isEnabled());
+        WebElement submitButton = driver.findElement(By.cssSelector("auth-login-form form > button"));
+        Assert.assertEquals(submitButton.isEnabled(), false);
 
     }
 
     @Test
-    public void LoginWithIncorrectEmail() {
+    public void LoginWithEmailWithoutAtSymbol() {
 
         // Arrange
-        final String email = "catbubliktest1yandex.ru";
+        final String emailInput = "catbubliktest1yandex.ru";
         driver.get("https://app.neuralegion.com/login");
 
         // Act
         WebElement login = driver.findElement(By.id("mat-input-0"));
-        login.sendKeys(email);
+        login.sendKeys(emailInput);
         WebElement password = driver.findElement(By.id("mat-input-1"));
         password.click();
 
@@ -102,15 +101,15 @@ public class LoginFormErrorStateTest {
     }
 
     @Test
-    public void LoginWithIncorrectEmail2() {
+    public void LoginWithEmailWithoutAtSymbolAndDomainName() {
 
         // Arrange
-        final String email = "catbubliktest1yu";
+        final String emailInput = "catbubliktest1yu";
         driver.get("https://app.neuralegion.com/login");
 
         // Act
         WebElement login = driver.findElement(By.id("mat-input-0"));
-        login.sendKeys(email);
+        login.sendKeys(emailInput);
         WebElement password = driver.findElement(By.id("mat-input-1"));
         password.click();
 
