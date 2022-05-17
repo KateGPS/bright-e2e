@@ -48,12 +48,12 @@ public class LoginFormErrorStateTest {
     public void LoginWithoutEmail() {
 
         // Arrange
-        final String emailInput = "catbubliktest1@yandex.ru";
+        final String email = "catbubliktest1@yandex.ru";
         driver.get("https://app.neuralegion.com/login");
 
         // Act
-        WebElement login = driver.findElement(By.id("mat-input-0"));
-        login.sendKeys(emailInput);
+        WebElement loginInput = driver.findElement(By.id("mat-input-0"));
+        loginInput.sendKeys(email);
 
         // Assert
         WebElement submitButton = driver.findElement(By.cssSelector("auth-login-form form > button"));
@@ -70,8 +70,8 @@ public class LoginFormErrorStateTest {
         driver.get("https://app.neuralegion.com/login");
 
         // Act
-        WebElement password = driver.findElement(By.id("mat-input-1"));
-        password.sendKeys(passwordText);
+        WebElement passwordInput = driver.findElement(By.id("mat-input-1"));
+        passwordInput.sendKeys(passwordText);
 
         // Assert
         WebElement submitButton = driver.findElement(By.cssSelector("auth-login-form form > button"));
@@ -83,14 +83,14 @@ public class LoginFormErrorStateTest {
     public void LoginWithEmailWithoutAtSymbol() {
 
         // Arrange
-        final String emailInput = "catbubliktest1yandex.ru";
+        final String email = "catbubliktest1yandex.ru";
         driver.get("https://app.neuralegion.com/login");
 
         // Act
-        WebElement login = driver.findElement(By.id("mat-input-0"));
-        login.sendKeys(emailInput);
-        WebElement password = driver.findElement(By.id("mat-input-1"));
-        password.click();
+        WebElement loginInput = driver.findElement(By.id("mat-input-0"));
+        loginInput.sendKeys(email);
+        WebElement passwordInput = driver.findElement(By.id("mat-input-1"));
+        passwordInput.click();
 
         // Assert
         WebElement emailField = driver.findElement(By.cssSelector("auth-login-form form > mat-form-field .mat-form-field-outline-thick"));
@@ -104,14 +104,14 @@ public class LoginFormErrorStateTest {
     public void LoginWithEmailWithoutAtSymbolAndDomainName() {
 
         // Arrange
-        final String emailInput = "catbubliktest1yu";
+        final String email = "catbubliktest1yu";
         driver.get("https://app.neuralegion.com/login");
 
         // Act
-        WebElement login = driver.findElement(By.id("mat-input-0"));
-        login.sendKeys(emailInput);
-        WebElement password = driver.findElement(By.id("mat-input-1"));
-        password.click();
+        WebElement loginInput = driver.findElement(By.id("mat-input-0"));
+        loginInput.sendKeys(email);
+        WebElement passwordInput = driver.findElement(By.id("mat-input-1"));
+        passwordInput.click();
 
         // Assert
         WebElement emailField = driver.findElement(By.cssSelector("auth-login-form form > mat-form-field .mat-form-field-outline-thick"));
