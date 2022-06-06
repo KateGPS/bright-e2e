@@ -32,7 +32,7 @@ public class PopUpScreenHide {
     }
 
     @Test (description = "turn off cookies")
-    public void PopUpScreenCookieBannerHide() {
+    public void HidePopUpScreenCookieBanner() {
 
         //Act
         WebElement cookiesBanner = driver.findElement(By.cssSelector("body .hs-cookie-notification-position-bottom"));
@@ -42,13 +42,13 @@ public class PopUpScreenHide {
         ((JavascriptExecutor) driver).executeScript("arguments[0].style.visibility='hidden'", cookiesBanner);
     }
 
-    @Test (description = "turn off intercome")
-    public void PopUpScreenIntercomeAppHide() {
+    @Test (description = "turn off intercom")
+    public void HidePopUpScreenIntercomApp() {
 
         //Act
-        WebElement intercomeApp = driver.findElement(By.cssSelector(".mat-typography .intercom-lightweight-app"));
+        WebElement intercomApp = driver.findElement(By.cssSelector(".mat-typography .intercom-lightweight-app"));
 
         //Assert
-        ((JavascriptExecutor)driver).executeScript("arguments[0].style.visibility='hidden'", intercomeApp);
+        ((JavascriptExecutor)driver).executeScript("arguments[0].style.visibility='hidden'", intercomApp);
     }
 }
