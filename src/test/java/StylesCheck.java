@@ -7,12 +7,8 @@ import org.openqa.selenium.support.Color;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeSuite;
-import org.testng.annotations.BeforeTest;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 
-import java.nio.channels.WritableByteChannel;
 import java.time.Duration;
 
 public class StylesCheck {
@@ -24,7 +20,7 @@ public class StylesCheck {
         WebDriverManager.chromedriver().setup();
     }
 
-    @BeforeTest
+    @BeforeMethod
     public void openBrowser() {
         driver = new ChromeDriver();
         driver.manage().timeouts().implicitlyWait(Duration.ofMillis(3000));
@@ -43,13 +39,13 @@ public class StylesCheck {
 
     }
 
-    @AfterTest
+    @AfterMethod
     public void closeBrowser() {
         driver.quit();
     }
 
     @Test
-    public void stylesCheckColorMenuButton() {
+    public void CheckMenuButtonColor() {
 
         // Arrange
 
@@ -64,7 +60,7 @@ public class StylesCheck {
     }
 
     @Test
-    public void stylesCheckColorRefreshButton() {
+    public void CheckRefreshButtonColor() {
 
         // Arrange
 
@@ -79,7 +75,7 @@ public class StylesCheck {
     }
 
     @Test
-    public void stylesCheckColorCreateScanButton() {
+    public void CheckScanButtonColor() {
 
         // Arrange
 
@@ -94,33 +90,33 @@ public class StylesCheck {
     }
 
     @Test
-    public void stylesCheckColorFilterButton() {
+    public void CheckFilterButtonColor() {
 
         // Arrange
 
         //Act
-        WebElement filterField = driver.findElement(By.cssSelector("share-table-filter button"));
-        String filterFieldColor = Color.fromString(filterField.getCssValue("color")).asHex();
-        final String expectedFilterFieldColor = "#07737d";
+        WebElement filterButton = driver.findElement(By.cssSelector("share-table-filter button"));
+        String filterButtonColor = Color.fromString(filterButton.getCssValue("color")).asHex();
+        final String expectedFilterButtonColor = "#07737d";
 
         //Assert
-        Assert.assertEquals(filterFieldColor, expectedFilterFieldColor);
+        Assert.assertEquals(filterButtonColor, expectedFilterButtonColor);
 
     }
 
     @Test
-    public void stylesCheckColorSortButton() {
+    public void CheckSortButtonColor() {
 
         // Arrange
 
         //Act
-        WebElement sortField = driver.findElement(By.cssSelector("share-table-sort button .mat-button-wrapper span"));
-        String sortFieldColor = Color.fromString(sortField.getCssValue("color")).asHex();
-        final String expectedSortFieldColor = "#07737d";
+        WebElement sortButton = driver.findElement(By.cssSelector("share-table-sort button .mat-button-wrapper span"));
+        String sortButtonColor = Color.fromString(sortButton.getCssValue("color")).asHex();
+        final String expectedSortButtonColor = "#07737d";
 
         //Assert
-        Assert.assertEquals(sortFieldColor, expectedSortFieldColor);
-        //java.lang.AssertionError: expected [#07737d] but found [#08838f]
+        Assert.assertEquals(sortButtonColor, expectedSortButtonColor);
+
 
     }
 }
