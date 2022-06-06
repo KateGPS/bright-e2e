@@ -24,7 +24,7 @@ public class StylesCheck {
     public void openBrowser() {
         driver = new ChromeDriver();
         driver.manage().timeouts().implicitlyWait(Duration.ofMillis(3000));
-        driver.get("httts://app.neuralegion.com/login");
+        driver.get("https://app.neuralegion.com/login");
         final String email = "catbubliktest1@yandex.ru";
         final String passwordText = "f@BzSJbGX68XAwr";
 
