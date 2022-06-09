@@ -1,15 +1,10 @@
+import LoginPage.LoginPage;
+import ScansPage.ScansPage;
 import io.github.bonigarcia.wdm.WebDriverManager;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeSuite;
-import org.testng.annotations.BeforeTest;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 
 import java.time.Duration;
 
@@ -22,19 +17,72 @@ public class LoginTest {
         WebDriverManager.chromedriver().setup();
     }
 
-    @BeforeTest
+    @BeforeMethod
     public void openBrowser() {
         this.driver = new ChromeDriver();
         driver.manage().timeouts().implicitlyWait(Duration.ofMillis(3000));
     }
 
-    @AfterTest
+    @AfterMethod
     public void closeBrowser() {
         this.driver.quit();
     }
 
     @Test
-    public void Login() {
+    public void successfulLoginTest() {
+        // Arrange
+        LoginPage loginPage = new LoginPage(driver);
+        loginPage.open();
+        Assert.assertTrue(loginPage.atPage());
+
+        // Act
+        loginPage.setEmail("catbubliktest1@yandex.ru");
+        loginPage.setPassword("f@BzSJbGX68XAwr");
+        ScansPage scansPage = loginPage.clickSignInButton();
+
+        // Assert
+        Assert.assertTrue(scansPage.atPage());
+    }
+
+    @Test
+    public void wrongEmailLoginTest() {
+        // Arrange
+        LoginPage loginPage = new LoginPage(driver);
+        loginPage.open();
+        Assert.assertTrue(loginPage.atPage());
+
+        // Act
+        loginPage.setEmail("catbubliktest@yandex.ru");
+        loginPage.setPassword("f@BzSJbGX68XAwr");
+        ScansPage scansPage = loginPage.clickSignInButton();
+
+        // Assert
+        Assert.assertFalse(scansPage.atPage());
+
+    }
+        @Test
+        public void wrongPasswordLoginTest() {
+            // Arrange
+            LoginPage loginPage = new LoginPage(driver);
+            loginPage.open();
+            Assert.assertTrue(loginPage.atPage());
+
+            // Act
+            loginPage.setEmail("catbubliktest1@yandex.ru");
+            loginPage.setPassword("f@BzSJAwr");
+            ScansPage scansPage = loginPage.clickSignInButton();
+
+            // Assert
+            Assert.assertFalse(scansPage.atPage());
+
+        }
+
+
+
+
+/*
+
+
         // Launch website
         driver.get("https://app.neuralegion.com/login");
 
@@ -73,8 +121,8 @@ public class LoginTest {
         String loginText = loginElement.getText();
         final String expectedText = "Scans";
         Assert.assertEquals(expectedText, loginText);
+*/
 
     }
-}
 
 
