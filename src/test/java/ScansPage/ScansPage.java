@@ -12,10 +12,10 @@ public class ScansPage {
         this.driver = driver;
     }
 
-    public boolean atPage() {
+    public boolean isOpened() {
         try {
             new WebDriverWait(driver, Duration.ofSeconds(10))
-                    .until(ExpectedConditions.titleIs("Scans · NeuraLegion"));
+                    .until(ExpectedConditions.titleIs("Scans · Bright Security"));
             return true;
         } catch (Exception e) {
             return false;

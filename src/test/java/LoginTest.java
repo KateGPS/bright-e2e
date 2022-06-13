@@ -33,7 +33,7 @@ public class LoginTest {
         // Arrange
         LoginPage loginPage = new LoginPage(driver);
         loginPage.open();
-        Assert.assertTrue(loginPage.atPage());
+        Assert.assertTrue(loginPage.isOpened());
 
         // Act
         loginPage.setEmail("catbubliktest1@yandex.ru");
@@ -41,7 +41,7 @@ public class LoginTest {
         ScansPage scansPage = loginPage.clickSignInButton();
 
         // Assert
-        Assert.assertTrue(scansPage.atPage());
+        Assert.assertTrue(scansPage.isOpened());
     }
 
     @Test
@@ -49,7 +49,7 @@ public class LoginTest {
         // Arrange
         LoginPage loginPage = new LoginPage(driver);
         loginPage.open();
-        Assert.assertTrue(loginPage.atPage());
+        Assert.assertTrue(loginPage.isOpened());
 
         // Act
         loginPage.setEmail("catbubliktest@yandex.ru");
@@ -57,7 +57,7 @@ public class LoginTest {
         ScansPage scansPage = loginPage.clickSignInButton();
 
         // Assert
-        Assert.assertFalse(scansPage.atPage());
+        Assert.assertFalse(scansPage.isOpened());
 
     }
         @Test
@@ -65,7 +65,7 @@ public class LoginTest {
             // Arrange
             LoginPage loginPage = new LoginPage(driver);
             loginPage.open();
-            Assert.assertTrue(loginPage.atPage());
+            Assert.assertTrue(loginPage.isOpened());
 
             // Act
             loginPage.setEmail("catbubliktest1@yandex.ru");
@@ -73,7 +73,7 @@ public class LoginTest {
             ScansPage scansPage = loginPage.clickSignInButton();
 
             // Assert
-            Assert.assertFalse(scansPage.atPage());
+            Assert.assertFalse(scansPage.isOpened());
 
         }
 
