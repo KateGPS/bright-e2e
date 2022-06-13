@@ -1,14 +1,11 @@
+import LoginPage.LoginPage;
 import io.github.bonigarcia.wdm.WebDriverManager;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.Color;
 import org.testng.Assert;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeSuite;
-import org.testng.annotations.BeforeTest;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
+import utils.AppColors;
 
 import java.time.Duration;
 
@@ -21,14 +18,13 @@ public class LoginFormErrorStateTest {
         WebDriverManager.chromedriver().setup();
     }
 
-    @BeforeTest
+    @BeforeMethod
     public void openBrowser() {
         driver = new ChromeDriver();
         driver.manage().timeouts().implicitlyWait(Duration.ofMillis(3000));
-
     }
 
-    @AfterTest
+    @AfterMethod
     public void closeBrowser() {
         driver.quit();
     }
@@ -37,87 +33,83 @@ public class LoginFormErrorStateTest {
     public void LoginWithoutEmailAndPassword() {
 
         // Arrange
-        driver.get("https://app.neuralegion.com/login");
+        LoginPage loginPage = new LoginPage(driver);
+        loginPage.open();
+        Assert.assertTrue(loginPage.isOpened());
 
         //Assert
-        WebElement submitButton = driver.findElement(By.cssSelector("auth-login-form form > button"));
-        Assert.assertEquals(submitButton.isEnabled(), false);
+        Assert.assertEquals(loginPage.getSigninButton().isEnabled(), false);
     }
 
     @Test
     public void LoginWithoutEmail() {
 
         // Arrange
-        final String email = "catbubliktest1@yandex.ru";
-        driver.get("https://app.neuralegion.com/login");
+        LoginPage loginPage = new LoginPage(driver);
+        loginPage.open();
+        Assert.assertTrue(loginPage.isOpened());
 
         // Act
-        WebElement loginInput = driver.findElement(By.id("mat-input-0"));
-        loginInput.sendKeys(email);
+        loginPage.setPassword("f@BzSJbGX68XAwr");
+        loginPage.blurPasswordField();
 
         // Assert
-        WebElement submitButton = driver.findElement(By.cssSelector("auth-login-form form > button"));
-        Assert.assertEquals(submitButton.isEnabled(), false);
-
+        Assert.assertEquals(loginPage.getSigninButton().isEnabled(), false);
     }
-
 
     @Test
     public void LoginWithoutPassword() {
 
         // Arrange
-        final String passwordText = "f@BzSJbGX68XAwr";
-        driver.get("https://app.neuralegion.com/login");
+        LoginPage loginPage = new LoginPage(driver);
+        loginPage.open();
+        Assert.assertTrue(loginPage.isOpened());
 
         // Act
-        WebElement passwordInput = driver.findElement(By.id("mat-input-1"));
-        passwordInput.sendKeys(passwordText);
+        loginPage.setEmail("catbubliktest1@yandex.ru");
+        loginPage.blurEmailField();
 
         // Assert
-        WebElement submitButton = driver.findElement(By.cssSelector("auth-login-form form > button"));
-        Assert.assertEquals(submitButton.isEnabled(), false);
-
+        Assert.assertEquals(loginPage.getSigninButton().isEnabled(), false);
     }
 
     @Test
     public void LoginWithEmailWithoutAtSymbol() {
 
         // Arrange
-        final String email = "catbubliktest1yandex.ru";
-        driver.get("https://app.neuralegion.com/login");
+        LoginPage loginPage = new LoginPage(driver);
+        loginPage.open();
+        Assert.assertTrue(loginPage.isOpened());
 
         // Act
-        WebElement loginInput = driver.findElement(By.id("mat-input-0"));
-        loginInput.sendKeys(email);
-        WebElement passwordInput = driver.findElement(By.id("mat-input-1"));
-        passwordInput.click();
+        loginPage.setEmail("catbubliktest1yandex.ru");
+        loginPage.setPassword("f@BzSJbGX68XAwr");
+
 
         // Assert
-        WebElement emailField = driver.findElement(By.cssSelector("auth-login-form form > mat-form-field .mat-form-field-outline-thick"));
+        String emailFieldOutlineColor = Color.fromString(loginPage.getEmailFieldOutline().getCssValue("color")).asHex();
+        Assert.assertEquals(emailFieldOutlineColor, AppColors.errorColor);
 
-        String emailFieldBorderColor = Color.fromString(emailField.getCssValue("color")).asHex();
-        final String expectedBorderColor = "#995e00";
-        Assert.assertEquals(emailFieldBorderColor, expectedBorderColor);
+        Assert.assertEquals(loginPage.getSigninButton().isEnabled(), false);
     }
 
-    @Test
-    public void LoginWithEmailWithoutAtSymbolAndDomainName() {
+        @Test
+        public void LoginWithEmailWithoutAtSymbolAndDomainName () {
 
-        // Arrange
-        final String email = "catbubliktest1yu";
-        driver.get("https://app.neuralegion.com/login");
+            // Arrange
+            LoginPage loginPage = new LoginPage(driver);
+            loginPage.open();
+            Assert.assertTrue(loginPage.isOpened());
 
-        // Act
-        WebElement loginInput = driver.findElement(By.id("mat-input-0"));
-        loginInput.sendKeys(email);
-        WebElement passwordInput = driver.findElement(By.id("mat-input-1"));
-        passwordInput.click();
+            // Act
+            loginPage.setEmail("catbubliktest1ru");
+            loginPage.setPassword("f@BzSJbGX68XAwr");
 
-        // Assert
-        WebElement emailField = driver.findElement(By.cssSelector("auth-login-form form > mat-form-field .mat-form-field-outline-thick"));
+            // Assert
+            String emailFieldOutlineColor = Color.fromString(loginPage.getEmailFieldOutline().getCssValue("color")).asHex();
+            Assert.assertEquals(emailFieldOutlineColor, AppColors.errorColor);
 
-        String emailFieldBorderColor = Color.fromString(emailField.getCssValue("color")).asHex();
-        final String expectedBorderColor = "#995e00";
-        Assert.assertEquals(emailFieldBorderColor, expectedBorderColor);
+            Assert.assertEquals(loginPage.getSigninButton().isEnabled(), false);
+        }
+
     }
-}
