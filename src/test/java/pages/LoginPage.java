@@ -1,29 +1,20 @@
-package LoginPage;
+package pages;
 
-import ScansPage.ScansPage;
+import pages.ScansPage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import pages.BasePage;
 
-import java.time.Duration;
-
-public class LoginPage {
-
-    private final WebDriver driver;
-
+public class LoginPage extends BasePage {
     private final By emailFieldInputLocator = By.id("mat-input-0");
     private final By emailFieldOutlineLocator = By.cssSelector("auth-login-form form > mat-form-field .mat-form-field-outline-thick");
     private final By passwordFieldInputLocator = By.id("mat-input-1");
     private final By signInBtnLocator = By.cssSelector("auth-login-form form > button");
 
     public LoginPage(WebDriver driver) {
-        this.driver = driver;
-    }
-
-    public void open() {
-        driver.get("https://app.neuralegion.com/login");
-        driver.manage().timeouts().implicitlyWait(Duration.ofMillis(3000));
+        super(driver, "https://app.neuralegion.com/login");
     }
 
     public void setEmail(String userName) {
@@ -58,6 +49,5 @@ public class LoginPage {
     public boolean isOpened() {
         return driver.findElement(By.cssSelector("mat-card-title.mat-card-title")).getText().equals("Sign in");
     }
-
 
 }

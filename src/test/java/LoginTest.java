@@ -1,5 +1,5 @@
-import LoginPage.LoginPage;
-import ScansPage.ScansPage;
+import pages.LoginPage;
+import pages.ScansPage;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
