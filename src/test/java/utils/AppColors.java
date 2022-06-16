@@ -6,5 +6,9 @@ public class AppColors {
     public static final String scansTextColorLightTheme = "#131719";
     public static final String toolbarColorDarkTheme = "#1e2528";
     public static final String toolbarColorLightTheme = "#ffffff";
-
+    public static final String menuButtonColor = "#07737d";
+    public static final String refreshButtonColor = "#07737d";
+    public static final String createScanButtonColor = "#07737d";
+    public static final String filterButtonColor = "#07737d";
+    public static final String sortButtonColor = "#07737d";
 }

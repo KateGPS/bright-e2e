@@ -1,13 +1,12 @@
 import io.github.bonigarcia.wdm.WebDriverManager;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.Color;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.*;
+import pages.LoginPage;
+import pages.ScansPage;
+import utils.AppColors;
 
 import java.time.Duration;
 
@@ -23,20 +22,17 @@ public class StylesCheck {
     @BeforeMethod
     public void openBrowser() {
         driver = new ChromeDriver();
-        driver.manage().timeouts().implicitlyWait(Duration.ofMillis(3000));
-        driver.get("https://app.neuralegion.com/login");
-        final String email = "catbubliktest1@yandex.ru";
-        final String passwordText = "f@BzSJbGX68XAwr";
+        driver.manage().timeouts().implicitlyWait(Duration.ofMillis(10000));
 
-        WebElement loginInput = driver.findElement(By.id("mat-input-0"));
-        WebElement passwordInput = driver.findElement(By.id("mat-input-1"));
-        loginInput.sendKeys(email);
-        passwordInput.sendKeys(passwordText);
-        WebElement submitButton = driver.findElement(By.cssSelector("auth-login-form form > button"));
-        submitButton.click();
-        new WebDriverWait(driver, Duration.ofSeconds(10))
-                .until(ExpectedConditions.elementToBeClickable(By.cssSelector("scans-scans-toolbar button:nth-of-type(1)")));
+        LoginPage loginPage = new LoginPage(driver);
+        loginPage.open();
+        Assert.assertTrue(loginPage.isOpened());
 
+        loginPage.setEmail("catbubliktest1@yandex.ru");
+        loginPage.setPassword("f@BzSJbGX68XAwr");
+        ScansPage scansPage = loginPage.clickSignInButton();
+
+        Assert.assertTrue(scansPage.isOpened());
     }
 
     @AfterMethod
@@ -48,14 +44,13 @@ public class StylesCheck {
     public void CheckMenuButtonColor() {
 
         // Arrange
+        ScansPage scansPage = new ScansPage(driver);
 
         //Act
-        WebElement menuButton = driver.findElement(By.cssSelector("share-app-header mat-toolbar-row > div:first-child .mat-button-wrapper mat-icon"));
-        String menuButtonColor = Color.fromString(menuButton.getCssValue("color")).asHex();
-        final String expectedMenuButtonColor = "#07737d";
+        String menuButtonColor = Color.fromString(scansPage.getMenuButton().getCssValue("color")).asHex();
 
         //Assert
-        Assert.assertEquals(menuButtonColor, expectedMenuButtonColor);
+        Assert.assertEquals(menuButtonColor, AppColors.menuButtonColor);
 
     }
 
@@ -63,14 +58,13 @@ public class StylesCheck {
     public void CheckRefreshButtonColor() {
 
         // Arrange
+        ScansPage scansPage = new ScansPage(driver);
 
         //Act
-        WebElement refreshButton = driver.findElement(By.cssSelector("share-page-refresh-button .mat-icon"));
-        String RefreshButtonColor = Color.fromString(refreshButton.getCssValue("color")).asHex();
-        final String expectedRefreshButtonColor = "#07737d";
+        String RefreshButtonColor = Color.fromString(scansPage.getRefreshButton().getCssValue("color")).asHex();
 
         //Assert
-        Assert.assertEquals(RefreshButtonColor, expectedRefreshButtonColor);
+        Assert.assertEquals(RefreshButtonColor, AppColors.refreshButtonColor);
 
     }
 
@@ -78,14 +72,13 @@ public class StylesCheck {
     public void CheckScanButtonColor() {
 
         // Arrange
+        ScansPage scansPage = new ScansPage(driver);
 
         //Act
-        WebElement createScanButton = driver.findElement(By.cssSelector("scans-scans-toolbar button mat-icon"));
-        String createScanButtonColor = Color.fromString(createScanButton.getCssValue("color")).asHex();
-        final String expectedCreateScanButtonColor = "#07737d";
+        String createScanButtonColor = Color.fromString(scansPage.getCreateScanButton().getCssValue("color")).asHex();
 
         //Assert
-        Assert.assertEquals(createScanButtonColor, expectedCreateScanButtonColor);
+        Assert.assertEquals(createScanButtonColor, AppColors.createScanButtonColor);
 
     }
 
@@ -93,14 +86,13 @@ public class StylesCheck {
     public void CheckFilterButtonColor() {
 
         // Arrange
+        ScansPage scansPage = new ScansPage(driver);
 
         //Act
-        WebElement filterButton = driver.findElement(By.cssSelector("share-table-filter button"));
-        String filterButtonColor = Color.fromString(filterButton.getCssValue("color")).asHex();
-        final String expectedFilterButtonColor = "#07737d";
+        String filterButtonColor = Color.fromString(scansPage.getFilterButton().getCssValue("color")).asHex();
 
         //Assert
-        Assert.assertEquals(filterButtonColor, expectedFilterButtonColor);
+        Assert.assertEquals(filterButtonColor, AppColors.filterButtonColor);
 
     }
 
@@ -108,16 +100,13 @@ public class StylesCheck {
     public void CheckSortButtonColor() {
 
         // Arrange
+        ScansPage scansPage = new ScansPage(driver);
 
         //Act
-        WebElement sortButton = driver.findElement(By.cssSelector("share-table-sort button .mat-button-wrapper span"));
-        String sortButtonColor = Color.fromString(sortButton.getCssValue("color")).asHex();
-        final String expectedSortButtonColor = "#07737d";
+        String sortButtonColor = Color.fromString(scansPage.getSortButton().getCssValue("color")).asHex();
 
         //Assert
-        Assert.assertEquals(sortButtonColor, expectedSortButtonColor);
-
-
+        Assert.assertEquals(sortButtonColor, AppColors.sortButtonColor);
     }
 }
 
