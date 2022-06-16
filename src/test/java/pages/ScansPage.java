@@ -1,15 +1,15 @@
-package ScansPage;
+package pages;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import pages.BasePage;
 
 import java.time.Duration;
 
-public class ScansPage {
-    private final WebDriver driver;
+public class ScansPage extends BasePage {
     public ScansPage(WebDriver driver) {
-        this.driver = driver;
+        super(driver, "https://app.neuralegion.com/scans");
     }
 
     public boolean isOpened() {
