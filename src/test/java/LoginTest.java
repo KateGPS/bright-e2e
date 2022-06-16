@@ -60,22 +60,22 @@ public class LoginTest {
         Assert.assertFalse(scansPage.isOpened());
 
     }
-        @Test
-        public void wrongPasswordLoginTest() {
-            // Arrange
-            LoginPage loginPage = new LoginPage(driver);
-            loginPage.open();
-            Assert.assertTrue(loginPage.isOpened());
 
-            // Act
-            loginPage.setEmail("catbubliktest1@yandex.ru");
-            loginPage.setPassword("f@BzSJAwr");
-            ScansPage scansPage = loginPage.clickSignInButton();
+    @Test
+    public void wrongPasswordLoginTest() {
+        // Arrange
+        LoginPage loginPage = new LoginPage(driver);
+        loginPage.open();
+        Assert.assertTrue(loginPage.isOpened());
 
-            // Assert
-            Assert.assertFalse(scansPage.isOpened());
+        // Act
+        loginPage.setEmail("catbubliktest1@yandex.ru");
+        loginPage.setPassword("f@BzSJAwr");
+        ScansPage scansPage = loginPage.clickSignInButton();
 
-        }
+        // Assert
+        Assert.assertFalse(scansPage.isOpened());
+
     }
-
+}
 

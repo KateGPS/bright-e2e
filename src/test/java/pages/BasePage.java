@@ -1,6 +1,11 @@
 package pages;
 
+
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public abstract class BasePage {
     protected final WebDriver driver;
@@ -13,6 +18,14 @@ public abstract class BasePage {
 
     public void open() {
         driver.get(url);
+    }
+    public void blurElement(WebElement element) {
+        ((JavascriptExecutor)driver).executeScript("arguments[0].blur()", element);
+    }
+
+    public void waitForElementToBeClickableAndClick(WebElement element) {
+        new WebDriverWait(driver, driver.manage().timeouts().getImplicitWaitTimeout())
+                .until(ExpectedConditions.elementToBeClickable(element)).click();
     }
 
     public abstract boolean isOpened();
