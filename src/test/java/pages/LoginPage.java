@@ -1,5 +1,6 @@
 package pages;
 
+import org.testng.Assert;
 import pages.ScansPage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -20,7 +21,6 @@ public class LoginPage extends BasePage {
     public void setEmail(String userName) {
         driver.findElement(emailFieldInputLocator).sendKeys(userName);
     }
-
     public void setPassword(String password) {
         driver.findElement(passwordFieldInputLocator).sendKeys(password);
     }
@@ -28,18 +28,16 @@ public class LoginPage extends BasePage {
     public WebElement getSigninButton(){
         return driver.findElement(signInBtnLocator);
     }
-
     public WebElement getEmailFieldOutline() {
         return driver.findElement(emailFieldOutlineLocator);
     }
-
-    public void blurEmailField() {
-        ((JavascriptExecutor)driver).executeScript("arguments[0].blur();", driver.findElement(emailFieldInputLocator));
+    public WebElement passwordFieldInput() {
+        return driver.findElement(passwordFieldInputLocator);
+    }
+    public WebElement emailFieldInput() {
+        return driver.findElement(emailFieldInputLocator);
     }
 
-    public void blurPasswordField() {
-        ((JavascriptExecutor)driver).executeScript("arguments[0].blur();", driver.findElement(passwordFieldInputLocator));
-    }
 
     public ScansPage clickSignInButton() {
         driver.findElement(signInBtnLocator).click();
@@ -49,5 +47,6 @@ public class LoginPage extends BasePage {
     public boolean isOpened() {
         return driver.findElement(By.cssSelector("mat-card-title.mat-card-title")).getText().equals("Sign in");
     }
+
 
 }

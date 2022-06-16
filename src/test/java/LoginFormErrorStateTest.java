@@ -51,7 +51,7 @@ public class LoginFormErrorStateTest {
 
         // Act
         loginPage.setPassword("f@BzSJbGX68XAwr");
-        loginPage.blurPasswordField();
+        loginPage.blurElement(loginPage.passwordFieldInput());
 
         // Assert
         Assert.assertEquals(loginPage.getSigninButton().isEnabled(), false);
@@ -67,7 +67,7 @@ public class LoginFormErrorStateTest {
 
         // Act
         loginPage.setEmail("catbubliktest1@yandex.ru");
-        loginPage.blurEmailField();
+        loginPage.blurElement(loginPage.emailFieldInput());
 
         // Assert
         Assert.assertEquals(loginPage.getSigninButton().isEnabled(), false);
