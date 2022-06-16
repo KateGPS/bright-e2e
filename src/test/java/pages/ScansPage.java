@@ -14,7 +14,7 @@ public class ScansPage extends BasePage {
     private final By overlayContainerLocator = By.className("cdk-overlay-container");
     private final By scansTextLocator = By.cssSelector("share-app-header share-breadcrumb");
     private final By toolbarRowLocator = By.cssSelector("share-app-header mat-toolbar");
-    private final By bodyClassAttributeLocator = By.tagName("body");
+    private final By bodyLocator = By.tagName("body");
 
 
     public ScansPage(WebDriver driver) {
@@ -48,11 +48,11 @@ public class ScansPage extends BasePage {
     }
 
     public boolean isDarkThemeEnabled() {
-        return driver.findElement(bodyClassAttributeLocator).getAttribute("class").contains("theme-dark");
+        return driver.findElement(bodyLocator).getAttribute("class").contains("theme-dark");
     }
 
     public boolean isLightThemeEnabled() {
-        return driver.findElement(bodyClassAttributeLocator).getAttribute("class").contains("theme-default");
+        return driver.findElement(bodyLocator).getAttribute("class").contains("theme-default");
     }
 
 }

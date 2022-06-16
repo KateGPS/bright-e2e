@@ -51,7 +51,6 @@ public class DarkModeSwitcherTest {
 
 
         //Assert
-        scansPage.blurElement(scansPage.getAccountButton());
         String scansTextColor = Color.fromString(scansPage.getScansText().getCssValue("color")).asHex();
         Assert.assertEquals(scansTextColor, AppColors.scansTextColorDarkTheme);
 
@@ -77,12 +76,12 @@ public class DarkModeSwitcherTest {
 
         scansPage.waitForElementToBeClickableAndClick(scansPage.getAccountButton());
         scansPage.clickThemeSwitcherToggle();
+        Assert.assertTrue(scansPage.isDarkThemeEnabled());
 
         //Act
         scansPage.clickThemeSwitcherToggle();
 
         //Assert
-        scansPage.blurElement(scansPage.getAccountButton());
         String scansTextColor = Color.fromString(scansPage.getScansText().getCssValue("color")).asHex();
         Assert.assertEquals(scansTextColor, AppColors.scansTextColorLightTheme);
 
